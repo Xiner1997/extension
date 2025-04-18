@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>文本高亮工具</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h2>高亮文本列表</h2>
+            <button id="clearHighlights" class="clear-button">清除所有高亮</button>
+        </div>
+        <div id="highlightsList" class="highlights-list">
+            <!-- 高亮列表将在这里动态生成 -->
+        </div>
+        <!-- 编辑标题的模态框 -->
+        <div id="editModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>编辑标题</h3>
+                    <button class="close-button">×</button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" id="titleInput" placeholder="输入标题">
+                </div>
+                <div class="modal-footer">
+                    <button id="saveTitle" class="save-button">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="popup.js"></script>
+</body>
+</html> 
