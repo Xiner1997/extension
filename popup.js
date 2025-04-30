@@ -47,6 +47,14 @@ document.addEventListener('DOMContentLoaded', function() {
             highlights.push(message.data);
             chrome.storage.local.set({ highlights: highlights });
             updateHighlightsList();
+        } else if (message.type === 'HIGHLIGHT_CLICKED') {
+            // 当高亮被点击时，滚动到对应位置
+            chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+                chrome.tabs.sendMessage(tabs[0].id, {
+                    type: 'SCROLL_TO_HIGHLIGHT',
+                    highlightId: message.highlightId
+                });
+            });
         }
     });
     
@@ -99,8 +107,10 @@ document.addEventListener('DOMContentLoaded', function() {
             item.className = 'highlight-item';
             item.innerHTML = `
                 <div class="highlight-content">
-                    ${highlight.title ? `<div class="highlight-title">${highlight.title}</div>` : ''}
-                    <div class="highlight-text">${highlight.text}</div>
+                    ${highlight.title ? 
+                        `<div class="highlight-title">${highlight.title}</div>` : 
+                        `<div class="highlight-text">${highlight.text}</div>`
+                    }
                     <div class="highlight-time">${new Date(highlight.timestamp).toLocaleString()}</div>
                 </div>
                 <div class="highlight-actions">
